@@ -7,41 +7,36 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-      .scroll-container {
-        width: 400px;
-        height: 300px;
-        overflow: auto;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-      }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
 
-      .content {
-        width: 1200px;
-        height: 800px;
-        background: linear-gradient(45deg, #6b8e23, #8a2be2);
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div
       id="scroll-container"
-      class="w-screen h-screen overflow-auto select-none"
+      class="w-screen h-screen overflow-auto select-none no-scrollbar"
     >
-      <div class="absolute inset-0"></div>
-      <img id="background-image" class="max-w-none select-none" />
-    </div>
-
-    <!-- <section
-      class="flex flex-col gap-8 items-center justify-center w-full h-screen"
-    >
-      <div>
-        <div class="border">
-          <h1 class="text-4xl font-semibold">Recicle</h1>
+      <div class="absolute inset-0 overflow-hidden">
+        <div
+          class="flex flex-col items-start absolute bottom-8 left-8 overflow-hidden px-4 py-2 rounded animate-kick"
+        >
+          <div class="bg-amber-600 rounded-lg px-4 py-1 -mb-6 ml-2 z-10">
+            <h1 class="text-4xl font-semibold text-headline">Recicle</h1>
+          </div>
+          <p class="bg-slate-700 text-white px-4 pb-2 pt-6 text-lg rounded-lg">
+            Procure por itens reciclaveis e acumule pontos até o fim da partida
+          </p>
         </div>
       </div>
-    </section> -->
+
+      <img id="background-image" class="max-w-none select-none" />
+    </div>
 
     <script src="scripts/mouse-scroll.js"></script>
     <script

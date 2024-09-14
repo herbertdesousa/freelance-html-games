@@ -1,0 +1,30 @@
+.text-headline {
+  font-size: 2.5rem;
+  font-family: "SUSE", cursive;
+  letter-spacing: 0.1rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/*  */
+
+@keyframes animate-kick {
+  0% {
+    transform: translateX(-1000px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-kick {
+  animation: animate-kick 200ms ease-in-out;
+}
