@@ -1,37 +1,39 @@
-const scrollContainer = document.getElementById("scroll-container");
+class MouseScroll {
+  constructor(id) {
+    const container = $(id);
 
-let isDown = false;
-let startX = 0;
-let startY = 0;
-let scrollLeft = 0;
-let scrollTop = 0;
+    let isDown = false;
+    let startX, startY;
+    let scrollLeft, scrollTop;
 
-scrollContainer.addEventListener("mousedown", (e) => {
-  isDown = true;
-  scrollContainer.classList.add("active");
-  startX = e.pageX - scrollContainer.offsetLeft;
-  startY = e.pageY - scrollContainer.offsetTop;
-  scrollLeft = scrollContainer.scrollLeft;
-  scrollTop = scrollContainer.scrollTop;
-});
+    container.mousedown((e) => {
+      isDown = true;
+      startX = e.pageX - container.offset().left;
+      startY = e.pageY - container.offset().top;
+      scrollLeft = container.scrollLeft();
+      scrollTop = container.scrollTop();
+    });
 
-scrollContainer.addEventListener("mouseleave", () => {
-  isDown = false;
-  scrollContainer.classList.remove("active");
-});
+    $(document).mouseup(() => {
+      isDown = false;
+    });
 
-scrollContainer.addEventListener("mouseup", () => {
-  isDown = false;
-  scrollContainer.classList.remove("active");
-});
+    container.mouseleave(() => {
+      isDown = false;
+    });
 
-scrollContainer.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - scrollContainer.offsetLeft;
-  const y = e.pageY - scrollContainer.offsetTop;
-  const walkX = (x - startX) * 1.5; // Multiplied for faster scrolling
-  const walkY = (y - startY) * 1.5;
-  scrollContainer.scrollLeft = scrollLeft - walkX;
-  scrollContainer.scrollTop = scrollTop - walkY;
-});
+    container.mousemove((e) => {
+      if (!isDown) return;
+
+      e.preventDefault();
+
+      var x = e.pageX - container.offset().left;
+      var y = e.pageY - container.offset().top;
+      var walkX = (x - startX) * 1.5; // Speed for horizontal scroll
+      var walkY = (y - startY) * 1.5; // Speed for vertical scroll
+
+      container.scrollLeft(scrollLeft - walkX);
+      container.scrollTop(scrollTop - walkY);
+    });
+  }
+}

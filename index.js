@@ -22,8 +22,12 @@ class CustomImage {
   }
 }
 
-const bgImage = new CustomImage("#background-image");
-bgImage.setSource(GAME_SETTINGS.backgroundImageSrc);
+$(document).ready(() => {
+  const bgImage = new CustomImage("#background-image");
+  bgImage.setSource(GAME_SETTINGS.backgroundImageSrc);
+
+  new MouseScroll("#scroll-container");
+});
 
 //
 
