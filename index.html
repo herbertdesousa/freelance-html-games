@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recicle | Encontre os lixos na imagem e as recicle</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .scroll-container {
+        width: 400px;
+        height: 300px;
+        overflow: auto;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+      }
+
+      .content {
+        width: 1200px;
+        height: 800px;
+        background: linear-gradient(45deg, #6b8e23, #8a2be2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      id="scroll-container"
+      class="w-screen h-screen overflow-auto select-none"
+    >
+      <div class="absolute inset-0"></div>
+      <img id="background-image" class="max-w-none select-none" />
+    </div>
+
+    <!-- <section
+      class="flex flex-col gap-8 items-center justify-center w-full h-screen"
+    >
+      <div>
+        <div class="border">
+          <h1 class="text-4xl font-semibold">Recicle</h1>
+        </div>
+      </div>
+    </section> -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="index.js"></script>
+    <script src="scripts/mouse-scroll.js"></script>
+  </body>
+</html>
