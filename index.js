@@ -10,14 +10,16 @@ const GAME_SETTINGS = {
 };
 
 const SETUP = {
-  backgroundImageId: "#background-image",
-  containerId: "#container",
+  backgroundImageId: "background-image",
+  containerId: "container",
   point: {
     width: 32,
     height: 32,
     enableBackground: true,
   },
 };
+
+const hashedId = (id) => `#${id}`;
 
 class CustomImage {
   query = "";
@@ -71,7 +73,7 @@ class Point {
 }
 
 $(document).ready(() => {
-  const bgImage = new CustomImage(SETUP.backgroundImageId);
+  const bgImage = new CustomImage(hashedId(SETUP.backgroundImageId));
   bgImage.setSource(GAME_SETTINGS.backgroundImageSrc);
 
   for (const gamePoint of GAME_SETTINGS.points) {
@@ -84,6 +86,6 @@ $(document).ready(() => {
 
     if (SETUP.point.enableBackground) point.setBgColor("#f0f");
 
-    $(SETUP.containerId).append(point.build());
+    $(hashedId(SETUP.containerId)).append(point.build());
   }
 });
