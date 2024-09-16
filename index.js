@@ -13,6 +13,7 @@ const SETUP = {
   backgroundImageId: "background-image",
   containerId: "container",
   point: {
+    class: "game-point",
     width: 32,
     height: 32,
     enableBackground: true,
@@ -20,6 +21,7 @@ const SETUP = {
 };
 
 const hashedId = (id) => `#${id}`;
+const dottedClass = (id) => `.${id}`;
 
 class CustomImage {
   query = "";
@@ -42,34 +44,50 @@ class CustomImage {
 }
 
 class Point {
-  classNames = [];
+  element = $("<article></article>");
 
   constructor() {}
 
   setWidthPx(px) {
-    this.classNames.push(`w-[${px}px]`);
-  }
-
-  setBgColor(color) {
-    this.classNames.push(`bg-[${color}]`);
+    this.element.css("width", `${px}px`);
   }
 
   setHeightPx(px) {
-    this.classNames.push(`h-[${px}px]`);
+    this.element.css("height", `${px}px`);
+  }
+
+  setBgColor(color) {
+    this.element.css("background", color);
   }
 
   setTopPercent(percentage) {
-    this.classNames.push(`top-[${percentage}%]`);
+    this.element.css("top", `${percentage}%`);
   }
 
   setLeftPercent(percentage) {
-    this.classNames.push(`left-[${percentage}%]`);
+    this.element.css("left", `${percentage}%`);
   }
 
-  build() {
-    const classNames = this.classNames.join(" ");
-    return `<div class="fixed ${classNames} rounded-full"></div>`;
+  setOnClick(fn) {
+    this.element.attr("onclick", fn);
   }
+
+  build(parentId = "") {
+    $(parentId).append(
+      this.element
+        .css("position", "fixed")
+        //
+        .css("z-index", 100)
+    );
+  }
+}
+
+/*
+  função chamada na criação da classe Point
+  tome cuidado ao mudar o nome da função
+*/
+function onClickPoint() {
+  alert("+1");
 }
 
 $(document).ready(() => {
@@ -83,9 +101,12 @@ $(document).ready(() => {
     point.setWidthPx(SETUP.point.width);
     point.setTopPercent(gamePoint.topPercentage);
     point.setLeftPercent(gamePoint.leftPercentage);
+    point.setOnClick("onClickPoint()");
 
     if (SETUP.point.enableBackground) point.setBgColor("#f0f");
 
-    $(hashedId(SETUP.containerId)).append(point.build());
+    point.build(hashedId(SETUP.containerId));
   }
+
+  $(dottedClass(SETUP.point.class));
 });
