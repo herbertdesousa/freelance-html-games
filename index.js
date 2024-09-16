@@ -23,7 +23,7 @@ const SETUP = {
 const hashedId = (id) => `#${id}`;
 const dottedClass = (id) => `.${id}`;
 
-class CustomImage {
+class BackgroundImage {
   query = "";
 
   constructor(query) {
@@ -32,14 +32,6 @@ class CustomImage {
 
   setSource(src = "") {
     $(this.query).attr("src", src);
-  }
-
-  setWidthPx(size = 0) {
-    $(this.query).css("width", `${size}px`);
-  }
-
-  setHeightPx(size = 0) {
-    $(this.query).css("height", `${size}px`);
   }
 }
 
@@ -92,7 +84,7 @@ function onClickPoint() {
 }
 
 $(document).ready(() => {
-  const bgImage = new CustomImage(hashedId(SETUP.backgroundImageId));
+  const bgImage = new BackgroundImage(hashedId(SETUP.backgroundImageId));
   bgImage.setSource(GAME_SETTINGS.backgroundImageSrc);
 
   for (const gamePoint of GAME_SETTINGS.points) {
