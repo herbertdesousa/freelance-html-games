@@ -1,11 +1,11 @@
 const GAME_SETTINGS = {
   backgroundImageSrc: "assets/img2.jpg",
   points: [
-    { topPercentage: 0, leftPercentage: 10 },
-    { topPercentage: 50, leftPercentage: 50 },
-    { topPercentage: 90, leftPercentage: 90 },
-    { topPercentage: 0, leftPercentage: 90 },
-    { topPercentage: 90, leftPercentage: 0 },
+    { imgSrc: "assets/img1.png", topPercentage: 0, leftPercentage: 10 },
+    { imgSrc: "assets/img1.png", topPercentage: 50, leftPercentage: 50 },
+    { imgSrc: "assets/img1.png", topPercentage: 90, leftPercentage: 90 },
+    { imgSrc: "assets/img1.png", topPercentage: 0, leftPercentage: 90 },
+    { imgSrc: "assets/img1.png", topPercentage: 90, leftPercentage: 0 },
   ],
 };
 
@@ -14,8 +14,8 @@ const SETUP = {
   containerId: "container",
   point: {
     class: "game-point",
-    width: 32,
-    height: 32,
+    width: 32, // optional, if undefined auto size
+    height: 32, // optional, if undefined auto size
     enableBackground: true,
   },
 };
@@ -44,9 +44,13 @@ class CustomImage {
 }
 
 class Point {
-  element = $("<article></article>");
+  element = $("<img></img>");
 
   constructor() {}
+
+  setSrc(src) {
+    this.element.attr("src", src);
+  }
 
   setWidthPx(px) {
     this.element.css("width", `${px}px`);
@@ -74,10 +78,7 @@ class Point {
 
   build(parentId = "") {
     $(parentId).append(
-      this.element
-        .css("position", "fixed")
-        //
-        .css("z-index", 100)
+      this.element.css("position", "fixed").css("z-index", 100)
     );
   }
 }
@@ -97,11 +98,12 @@ $(document).ready(() => {
   for (const gamePoint of GAME_SETTINGS.points) {
     const point = new Point();
 
-    point.setHeightPx(SETUP.point.height);
-    point.setWidthPx(SETUP.point.width);
+    if (SETUP.point.height) point.setHeightPx(SETUP.point.height);
+    if (SETUP.point.width) point.setWidthPx(SETUP.point.width);
     point.setTopPercent(gamePoint.topPercentage);
     point.setLeftPercent(gamePoint.leftPercentage);
     point.setOnClick("onClickPoint()");
+    point.setSrc(gamePoint.imgSrc);
 
     if (SETUP.point.enableBackground) point.setBgColor("#f0f");
 
