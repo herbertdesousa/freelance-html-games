@@ -89,9 +89,11 @@ function updateGameDescription() {
   função chamada na criação da classe Point
   tome cuidado ao mudar o nome da função
 */
-function onClickPoint() {
+function onClickPoint(element) {
   points++;
   updateGameDescription();
+
+  $(element).remove();
 
   if (points >= SETUP.pointsToWin) {
     alert("Você ganhou!");
@@ -115,7 +117,7 @@ $(document).ready(() => {
     if (SETUP.point.width) point.setWidthPx(SETUP.point.width);
     point.setTopPercent(gamePoint.topPercentage);
     point.setLeftPercent(gamePoint.leftPercentage);
-    point.setOnClick("onClickPoint()");
+    point.setOnClick(`onClickPoint(this)`);
     point.setSrc(gamePoint.imgSrc);
 
     if (SETUP.point.enableBackground) point.setBgColor("#f0f");
