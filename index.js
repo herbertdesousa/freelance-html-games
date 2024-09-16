@@ -9,9 +9,13 @@ const GAME_SETTINGS = {
   ],
 };
 
+let points = 0;
+
 const SETUP = {
   backgroundImageId: "background-image",
   containerId: "container",
+  gameDescription: "game-description",
+  pointsToWin: 5,
   point: {
     class: "game-point",
     width: 32, // optional, if undefined auto size
@@ -75,17 +79,34 @@ class Point {
   }
 }
 
+function updateGameDescription() {
+  $(hashedId(SETUP.gameDescription)).text(
+    `Procure por itens ${points}/${SETUP.pointsToWin}`
+  );
+}
+
 /*
   função chamada na criação da classe Point
   tome cuidado ao mudar o nome da função
 */
 function onClickPoint() {
+  points++;
+  updateGameDescription();
+
+  if (points >= SETUP.pointsToWin) {
+    alert("Você ganhou!");
+    window.location.reload();
+    return;
+  }
+
   alert("+1");
 }
 
 $(document).ready(() => {
   const bgImage = new BackgroundImage(hashedId(SETUP.backgroundImageId));
   bgImage.setSource(GAME_SETTINGS.backgroundImageSrc);
+
+  updateGameDescription();
 
   for (const gamePoint of GAME_SETTINGS.points) {
     const point = new Point();
